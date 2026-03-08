@@ -1,34 +1,35 @@
 class Solution {
 public:
     int numJewelsInStones(string jewels, string stones) {
-    unordered_map<char,bool> mp;
-    for(char ch: jewels)
-    {
-        mp[ch]= true;
-    } 
+        
     int count=0;
-
-    for(char ch: stones)
+    for(int i =0; i< jewels.size(); i++)
     {
-        if(mp[ch])
+        for(int j =0; j< stones.size();j++)
         {
-            count++;
+            if(jewels[i] == stones[j])
+            {
+                count++;
+            }
         }
     }
-
-
-
-    // int count=0;
-    // for(int i =0; i< jewels.size(); i++)
+    // unordered_map<char,bool> mp;
+    // for(char ch: jewels)
     // {
-    //     for(int j =0; j< stones.size();j++)
+    //     mp[ch]= true;
+    // } 
+    // int count=0;
+
+    // for(char ch: stones)
+    // {
+    //     if(mp[ch])
     //     {
-    //         if(jewels[i] == stones[j])
-    //         {
-    //             count++;
-    //         }
+    //         count++;
     //     }
     // }
+
+
+
     return count;
     }
 };
