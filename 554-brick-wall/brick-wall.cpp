@@ -3,24 +3,28 @@ public:
     int leastBricks(vector<vector<int>>& wall) {
         
         unordered_map<long long,int> mp;
-        
-        for(auto &row : wall)
+        for(int i =0; i< wall.size();i++)
         {
-            long long sum = 0;
-
-            for(int i = 0; i < row.size() - 1; i++)
+          vector<int>& row = wall[i];
+            long long sum=0;
+            for(int j=0 ; j<row.size() - 1;j++)
             {
-                sum += row[i];
+                sum= sum + row[j];
                 mp[sum]++;
             }
         }
 
         int maxFreq = 0;
 
-        for(auto &it : mp)
-        {
-            maxFreq = max(maxFreq, it.second);
-        }
+     for(auto it = mp.begin(); it != mp.end(); it++)
+{
+    int freq = it->second;
+
+    if(freq > maxFreq)
+    {
+        maxFreq = freq;
+    }
+}
 
         return wall.size() - maxFreq;
     }
