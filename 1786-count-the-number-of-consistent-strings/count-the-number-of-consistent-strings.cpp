@@ -1,31 +1,24 @@
 class Solution {
 public:
     int countConsistentStrings(string allowed, vector<string>& words) {
-        
-        unordered_map<char, int> mp;
-
-        // store allowed characters in hashmap
-        for(int i = 0; i < allowed.length(); i++){
-            mp[allowed[i]] = 1;
+        unordered_set<char> mp;
+        for(char c : allowed){
+            mp.insert(c);
         }
 
         int count = 0;
 
-        // check each word
-        for(int i = 0; i < words.size(); i++){
+        for(string word : words){
             bool valid = true;
 
-            for(int j = 0; j < words[i].length(); j++){
-                
-                if(mp[words[i][j]] == 0){
+            for(char c : word){
+                if(mp.find(c) == mp.end()){
                     valid = false;
                     break;
                 }
             }
 
-            if(valid == true){
-                count++;
-            }
+            if(valid) count++;
         }
 
         return count;
