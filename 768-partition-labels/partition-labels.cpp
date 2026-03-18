@@ -1,30 +1,34 @@
 class Solution {
 public:
     vector<int> partitionLabels(string s) {
-        vector<int> last(26, 0);
+        vector<int> last(26);
         
-        // Step 1: store last occurrence
+        // store last positions
         for (int i = 0; i < s.size(); i++) {
             last[s[i] - 'a'] = i;
         }
 
-        vector<int> result;
-        int start = 0;
-        int end = 0;
+        vector<int> ans;
+        int size = 0;   // current partition size
+        int end = 0;    // farthest boundary
 
-        // Step 2: traverse string
         for (int i = 0; i < s.size(); i++) {
-            end = max(end, last[s[i] - 'a']);  // update end
+            size++;  // keep adding characters
             
-            if (i == end) {  // partition found
-                result.push_back(end - start + 1);
-                start = i + 1;
+            end = max(end, last[s[i] - 'a']);
+            
+            if (i == end) {   // partition ends here
+                ans.push_back(size);
+                size = 0;     // reset for next partition
             }
         }
 
-        return result;
+        return ans;
     }
 };
+
+
+
 // we need to store the last index of each character like when last a appear 
 // store this in a tabular array you can say 
 // then start from 
