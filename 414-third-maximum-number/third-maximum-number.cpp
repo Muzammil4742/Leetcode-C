@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        
+        int count = 1; // largest is first distinct
+        for (int i = nums.size() - 2; i >= 0; i--) {
+            if (nums[i] != nums[i + 1]) {
+                count++;
+            }
+            if (count == 3) return nums[i];
+        }
+        
+        return nums.back(); // if less than 3 distinct
+    }
+};
